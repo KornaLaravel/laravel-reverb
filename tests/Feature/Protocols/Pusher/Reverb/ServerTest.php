@@ -405,3 +405,31 @@ it('removes a channel when no subscribers remain', function () {
 
     expect(channels()->all())->toHaveCount(0);
 });
+
+it('rejects messages over the max allowed size', function () {
+    $connection = connect();
+    
+    $response = send([
+        'event' => 'pusher:subscribe',
+        'data' => [
+            'channel' => 'my-channel',
+            'channel_data' => json_encode([str_repeat('a', 10_100)]),
+        ],
+    ], $connection);
+
+    expect($response)->toBe('Maximum message size exceeded');
+});
+
+it('allows message within the max allowed size', function () {
+    $connection = connect(key: 'reverb-key-2');
+    
+    $response = send([
+        'event' => 'pusher:subscribe',
+        'data' => [
+            'channel' => 'my-channel',
+            'channel_data' => json_encode([str_repeat('a', 20_000)]),
+        ],
+    ], $connection);
+
+    expect($response)->toBe('{"event":"pusher_internal:subscription_succeeded","channel":"my-channel"}');
+});
