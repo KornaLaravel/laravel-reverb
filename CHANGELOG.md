@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/reverb/compare/v1.9.0...main)
+## [Unreleased](https://github.com/laravel/reverb/compare/v1.10.0...main)
+
+## [v1.10.0](https://github.com/laravel/reverb/compare/v1.9.0...v1.10.0) - 2026-03-29
+
+* Use singletonIf and bindIf in makePusherRouter to prevent overwriting user-defined bindings by [@andre-hoffmann](https://github.com/andre-hoffmann) in https://github.com/laravel/reverb/pull/373
+* Include server path in broadcasting connection config by [@JoshSalway](https://github.com/JoshSalway) in https://github.com/laravel/reverb/pull/374
 
 ## [v1.9.0](https://github.com/laravel/reverb/compare/v1.8.1...v1.9.0) - 2026-03-20
 
